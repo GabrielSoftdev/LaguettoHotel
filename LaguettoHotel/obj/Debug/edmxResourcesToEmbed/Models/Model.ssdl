@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LaguettoHotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="idCliente" />
+    </Key>
+    <Property Name="idCliente" Type="int" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="Telefone" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CEP" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="Logradouro" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Bairro" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cidade" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UF" Type="varchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Funcionario">
+    <Key>
+      <PropertyRef Name="idFuncionario" />
+    </Key>
+    <Property Name="idFuncionario" Type="int" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="Telefone" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CEP" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="Logradouro" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Bairro" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cidade" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UF" Type="varchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="loginUser">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reserva">
+    <Key>
+      <PropertyRef Name="idQuarto" />
+    </Key>
+    <Property Name="idQuarto" Type="int" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="Quarto" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="valorDiaria" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="valorTotal" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="dataEntrada" Type="date" Nullable="false" />
+    <Property Name="dataSaida" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Servico">
+    <Key>
+      <PropertyRef Name="idServico" />
+    </Key>
+    <Property Name="idServico" Type="int" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="Servicos" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="valorServicos" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vendas">
+    <Key>
+      <PropertyRef Name="idVendas" />
+    </Key>
+    <Property Name="idVendas" Type="int" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="valorDiaria" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="valorServicos" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="LaguettoHotelModelStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Funcionario" EntityType="Self.Funcionario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="loginUser" EntityType="Self.loginUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Servico" EntityType="Self.Servico" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendas" EntityType="Self.Vendas" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
