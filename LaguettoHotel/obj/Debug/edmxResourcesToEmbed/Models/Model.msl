@@ -37,6 +37,10 @@
           <ScalarProperty Name="idUser" ColumnName="idUser" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+          <ScalarProperty Name="admin" ColumnName="admin" />
+          <ScalarProperty Name="foreignId" ColumnName="foreignId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

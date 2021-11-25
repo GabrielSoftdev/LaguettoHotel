@@ -17,5 +17,9 @@ namespace LaguettoHotel.Models
         public int idUser { get; set; }
         public string Username { get; set; }
         public string password { get; set; }
+        public string email { get; set; }
+        public string tipoUsuario { get; set; }
+        public string admin { get; set; }
+        public int foreignId { get; set; }
     }
 }

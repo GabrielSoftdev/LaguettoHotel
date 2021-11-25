@@ -1,0 +1,13 @@
+﻿
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@if (Session.Keys.Count > 0 && Session["usuarioLogado"] != null)
+{
+    <p>Ola, @Session["usuarioLogado"]</p>
+}
+

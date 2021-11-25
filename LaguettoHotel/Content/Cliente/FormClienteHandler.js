@@ -18,7 +18,7 @@ function validaCampos() {
         var campos = [
             'Nome',
             'CPF',
-            /*'Email',*/
+            'Email',
             'CEP',
             /*'Numero',*/
             /*'Senha',*/

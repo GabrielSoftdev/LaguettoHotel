@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="idCliente" />
     </Key>
-    <Property Name="idCliente" Type="int" Nullable="false" />
+    <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
     <Property Name="Telefone" Type="varchar" MaxLength="15" Nullable="false" />
@@ -32,9 +32,13 @@
     <Key>
       <PropertyRef Name="idUser" />
     </Key>
-    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="tipoUsuario" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="admin" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="foreignId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Reserva">
     <Key>

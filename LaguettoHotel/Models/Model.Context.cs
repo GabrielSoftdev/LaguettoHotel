@@ -31,7 +31,5 @@ namespace LaguettoHotel.Models
         public virtual DbSet<Reserva> Reserva { get; set; }
         public virtual DbSet<Servico> Servico { get; set; }
         public virtual DbSet<Vendas> Vendas { get; set; }
-
-        public System.Data.Entity.DbSet<Hotel.Models.ClienteViewModel> ClienteViewModels { get; set; }
     }
 }

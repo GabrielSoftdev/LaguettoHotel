@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Hotel.Models
+namespace LaguettoHotel.Models
 {
     public class ClienteViewModel
     {
@@ -23,6 +23,13 @@ namespace Hotel.Models
         [Display(Name = "CPF", Prompt = "Insira seu CPF", Description = "Descrição")]
         [Required(ErrorMessage = "Por favor preencha o seu CPF!")]
         public string CPF { get; set; }
+
+        /*************** Email ***************/
+        [Display(Name = "Email", Prompt = "Insira o seu Email", Description = "Descrição")]
+        [Required(ErrorMessage = "Por favor informe seu Email!")]
+        [MaxLength(length: 150, ErrorMessage = "Email excede o máximo de caracteres permitido!")]
+        [MinLength(length: 3, ErrorMessage = "Email precisa no mínimo conter 3 caracteres!")]
+        public string Email { get; set; }
 
         /*************** Senha ***************/
         [Display(Name = "Senha", Prompt = "Insira sua Senha", Description = "Descrição")]

@@ -79,4 +79,6 @@ C:\Users\User\Desktop\LaguettoHotel\LaguettoHotel\obj\Debug\LaguettoHotel.csproj
 C:\Users\User\Desktop\LaguettoHotel\LaguettoHotel\obj\Debug\LaguettoHotel.csproj.CopyComplete
 C:\Users\User\Desktop\LaguettoHotel\LaguettoHotel\obj\Debug\LaguettoHotel.dll
 C:\Users\User\Desktop\LaguettoHotel\LaguettoHotel\obj\Debug\LaguettoHotel.pdb
+C:\Users\User\Desktop\LaguettoHotel\LaguettoHotel\bin\Newtonsoft.Json.dll
+C:\Users\User\Desktop\LaguettoHotel\LaguettoHotel\bin\Newtonsoft.Json.xml
 C:\Users\User\Desktop\LaguettoHotel\LaguettoHotel\obj\Debug\LaguettoHotel.csproj.AssemblyReference.cache

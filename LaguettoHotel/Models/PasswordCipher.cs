@@ -7,7 +7,7 @@ using System.Text;
 using System.Web;
 using System.Windows.Input;
 
-namespace Hotel.Models
+namespace LaguettoHotel.Models
 {
     public class PasswordCipher
     {

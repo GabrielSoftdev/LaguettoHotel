@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Hotel.Models.ClienteViewModel>
+﻿@model IEnumerable<LaguettoHotel.Models.Cliente>
 
 @{
     ViewBag.Title = "Index";
@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo Cliente", "Create", "ClienteViewModels", new { area = "" }, new { @class = "navbar-brand" })
 </p>
 <table class="table">
     <tr>
@@ -19,64 +19,28 @@
             @Html.DisplayNameFor(model => model.CPF)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Senha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CEP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Endereco)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bairro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cidade)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Uf)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Telefone)
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CPF)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Senha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CEP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Endereco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bairro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cidade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Uf)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefone)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDpessoa }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDpessoa }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDpessoa })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idCliente }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idCliente }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idCliente })
+            </td>
+        </tr>
+    }
 
 </table>

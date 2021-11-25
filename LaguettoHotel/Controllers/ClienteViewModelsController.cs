@@ -9,7 +9,6 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
-using Hotel.Models;
 using LaguettoHotel.Models;
 using Newtonsoft.Json;
 
@@ -22,7 +21,7 @@ namespace LaguettoHotel.Controllers
         // GET: ClienteViewModels
         public ActionResult Index()
         {
-            return View(db.ClienteViewModels.ToList());
+            return View(db.Cliente.ToList());
         }
 
         // GET: ClienteViewModels/Details/5
@@ -32,7 +31,7 @@ namespace LaguettoHotel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ClienteViewModel clienteViewModel = db.ClienteViewModels.Find(id);
+            Cliente clienteViewModel = db.Cliente.Find(id);
             if (clienteViewModel == null)
             {
                 return HttpNotFound();
@@ -46,29 +45,37 @@ namespace LaguettoHotel.Controllers
             return View();
         }
 
-        // POST: ClienteViewModels/Create
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDpessoa,Nome,CPF,Senha,CEP,Endereco,Bairro,Cidade,Uf,Telefone")] ClienteViewModel clienteViewModel)
+        public ActionResult Create(ClienteViewModel clienteViewModel)
         {
+
+            //DEBUG:
+            //var json = JsonConvert.SerializeObject(clienteViewModel);
+            //ViewBag.post = json;
+
+            //return Json(json);
 
             if (ModelState.IsValid)
             {
-                //DEBUG:
-                var json = JsonConvert.SerializeObject(clienteViewModel);
-
-
                 //TRATANDO OS DADOS
                 string senha = clienteViewModel.Senha != null ? PasswordCipher.Hash(clienteViewModel.Senha) : null;
                 string cpf = Regex.Replace(clienteViewModel.CPF, "[^0-9,]", "");
                 string telefone = clienteViewModel.Telefone != null ? Regex.Replace(clienteViewModel.Telefone, "[^0-9,]", "") : null;
                 string cep = Regex.Replace(clienteViewModel.CEP, "[^0-9,]", "");
+                string usuario = clienteViewModel.Nome.Split(' ')[0];
 
+
+                // VALIDANDO DADOS UNICOS
                 if (db.Cliente.Any(o => o.CPF == cpf))
                 {
                     ModelState.AddModelError(string.Empty, "O CPF já existe.");
+                    return View(clienteViewModel);
+                }
+
+                if (db.loginUser.Any(o => o.email == clienteViewModel.Email))
+                {
+                    ModelState.AddModelError(string.Empty, "O Email já existe.");
                     return View(clienteViewModel);
                 }
 
@@ -88,8 +95,50 @@ namespace LaguettoHotel.Controllers
                 try
                 {
                     db.SaveChanges();
-                    //return RedirectToAction("Login", "Account");
-                    return View("Index");
+                    // PEGANDO O ID DO CLIENTE INSERIDO
+                    int lastInsertedId = c.idCliente;
+
+                    // USUARIO
+                    loginUser u = new loginUser();
+                    u.Username = usuario;
+                    u.password = senha;
+                    u.email = clienteViewModel.Email;
+                    u.tipoUsuario = "c";
+                    u.admin = "n";
+                    u.foreignId = lastInsertedId;
+
+                    db.loginUser.Add(u);
+
+                    try
+                    {
+                        db.SaveChanges();
+
+                        return RedirectToAction("Login");
+                        //return View("Index");
+                    }
+                    catch (DbEntityValidationException ex)
+                    {
+                        foreach (DbEntityValidationResult item in ex.EntityValidationErrors)
+                        {
+                            // Get entry
+
+                            DbEntityEntry entry = item.Entry;
+                            string entityTypeName = entry.Entity.GetType().Name;
+
+                            // Display or log error messages
+
+                            foreach (DbValidationError subItem in item.ValidationErrors)
+                            {
+                                //occurred in {1} at {2}
+                                string message = string.Format("{0}",
+                                         subItem.ErrorMessage, entityTypeName, subItem.PropertyName);
+
+                                ModelState.AddModelError(string.Empty, message);
+                                return View(clienteViewModel);
+                                //Console.WriteLine(message);
+                            }
+                        }
+                    }
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -126,7 +175,7 @@ namespace LaguettoHotel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ClienteViewModel clienteViewModel = db.ClienteViewModels.Find(id);
+            Cliente clienteViewModel = db.Cliente.Find(id);
             if (clienteViewModel == null)
             {
                 return HttpNotFound();
@@ -134,9 +183,6 @@ namespace LaguettoHotel.Controllers
             return View(clienteViewModel);
         }
 
-        // POST: ClienteViewModels/Edit/5
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IDpessoa,Nome,CPF,Senha,CEP,Endereco,Bairro,Cidade,Uf,Telefone")] ClienteViewModel clienteViewModel)
@@ -204,7 +250,7 @@ namespace LaguettoHotel.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+  
         protected override void Dispose(bool disposing)
         {
             if (disposing)
