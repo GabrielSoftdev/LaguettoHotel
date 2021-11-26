@@ -16,68 +16,68 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="container-fluid" style="margin-bottom:50px; margin-top:90px">
+<div class="container-fluid" style="margin-bottom:90px; margin-top:200px">
 
-        <div class="hotel_booking_area position">
-            <div class="container">
-                <div class="hotel_booking_table" id="table">
+    <div class="hotel_booking_area position">
+        <div class="container">
+            <h2 style="margin-top:-20px">Reservas</h2>
+            <hr />
+            <div class="hotel_booking_table" id="table">
 
-                    <h2>Reservas</h2>
-                    <div class="col-md-3">
-                        <h2>Valor total: <br /> R$<span id="valor">00,00</span></h2>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="boking_table">
-                            <div class="row pl-5">
-                                <div class="col-md-4">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker11'>
+                <div class="col-md-3">
+                    <h2>Valor diaria: <br /> R$<span id="valor">80,00</span></h2>
+                </div>
+                <div class="col-md-9">
+                    <div class="boking_table">
+                        <div class="row pl-5">
+                            <div class="col-md-4">
+                                <div class="book_tabel_item">
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker11'>
 
-                                                @Html.EditorFor(model => model.dataEntrada, new { htmlAttributes = new { @class = "form-control", placeholder = "Entrada", style = "color:white" } })
+                                            @Html.EditorFor(model => model.dataEntrada, new { htmlAttributes = new { @class = "form-control", placeholder = "Entrada", style = "color:white" } })
 
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            </span>
                                         </div>
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker11'>
-                                                @Html.EditorFor(model => model.dataSaida, new { htmlAttributes = new { @class = "form-control", placeholder = "Saida", style = "color:white" } })
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker11'>
+                                            @Html.EditorFor(model => model.dataSaida, new { htmlAttributes = new { @class = "form-control", placeholder = "Saida", style = "color:white" } })
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                @{
+                            </div>
+                            <div class="col-md-4">
+                                <div class="book_tabel_item">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            @{
 
 
-                                                    LaguettoHotel.Models.Cliente cliente = (LaguettoHotel.Models.Cliente)Session["dadosForeign"];
+                                                LaguettoHotel.Models.Cliente cliente = (LaguettoHotel.Models.Cliente)Session["dadosForeign"];
 
-                                                }
+                                            }
 
-                                                @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @Value = cliente.CPF, @class = "form-control", placeholder = "CPF", style = "color:white" } });
-                                            </div>
-                                        </div>
-                                        <div class="input-group form-group">
-                                            @Html.DropDownList("Quarto", new List<SelectListItem> {
-                                                new SelectListItem { Text = "Quarto 01", Value = "1"},
-                                                new SelectListItem { Text = "Quarto 01", Value = "2"},
-                                                new SelectListItem { Text = "Quarto 03", Value = "3"},
-                                                new SelectListItem { Text = "Quarto 04", Value = "4"}
-                                            }, "Quarto", new { @class = "wide bg-light", style = "background:white" })
+                                            @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @Value = cliente.CPF, @class = "form-control", placeholder = "CPF", style = "color:white" } });
                                         </div>
                                     </div>
+                                    <div class="input-group form-group">
+                                        @Html.DropDownList("Quarto", new List<SelectListItem> {
+                                            new SelectListItem { Text = "Quarto 01", Value = "1"},
+                                            new SelectListItem { Text = "Quarto 01", Value = "2"},
+                                            new SelectListItem { Text = "Quarto 03", Value = "3"},
+                                            new SelectListItem { Text = "Quarto 04", Value = "4"}
+                                        }, "Quarto", new { @class = "wide bg-light", style = "background:white" })
+                                    </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <button class="book_now_btn button_hover" type="submit">Reservar!</button>
-                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <button class="book_now_btn button_hover" type="submit">Reservar!</button>
                             </div>
                         </div>
                     </div>
@@ -85,4 +85,5 @@
             </div>
         </div>
     </div>
+</div>
 }
