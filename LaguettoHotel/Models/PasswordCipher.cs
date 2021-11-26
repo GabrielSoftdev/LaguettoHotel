@@ -11,21 +11,17 @@ namespace LaguettoHotel.Models
 {
     public class PasswordCipher
     {
-        public static string Hash(string input)
+        public static string GetMD5(string value)
         {
-            using (SHA1Managed sha1 = new SHA1Managed())
+            MD5 md5 = MD5.Create();
+            byte[] md5Bytes = System.Text.Encoding.Default.GetBytes(value);
+            byte[] cryString = md5.ComputeHash(md5Bytes);
+            string md5Str = string.Empty;
+            for (int i = 0; i < cryString.Length; i++)
             {
-                var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(input));
-                var sb = new StringBuilder(hash.Length * 2);
-
-                foreach (byte b in hash)
-                {
-                    // can be "x2" if you want lowercase
-                    sb.Append(b.ToString("X2"));
-                }
-
-                return sb.ToString();
+                md5Str += cryString[i].ToString("X");
             }
+            return md5Str;
         }
     }
 }

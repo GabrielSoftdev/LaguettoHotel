@@ -7,7 +7,12 @@
 
 <style>
     body {
+        padding-top: 120px;
         background-color: whitesmoke
+    }
+
+    footer {
+        margin-top: 60px;
     }
 
     .form {
@@ -24,36 +29,44 @@
     }
 </style>
 
-<div class="container bg-light p-5 mt-5" style="border-radius:20px; max-width:500px">
+
+
+<div class="container bg-light p-5" style="border-radius:20px; max-width:500px">
+
+
     @using (Html.BeginForm("Login", "Account", new { @class = "form w-100" }, FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <h4>Login</h4>
-        @Html.ValidationSummary(true)
-        <hr />
-        <div class="form-group w-100">
-            @Html.LabelFor(model => model.email, new { @class = "col-sm-2 col-form-label" })
-            <div class="mb-3 w-100">
-                @Html.EditorFor(model => model.email, new { @class = "w-100 d-flex" })
-                @Html.ValidationMessageFor(model => model.email)
-            </div>
-        </div>
-        <div class="form-group w-100">
-            @Html.LabelFor(model => model.password, new { @class = "col-sm-2 col-form-label" })
-            <div class="mb-3 w-100">
-                @Html.EditorFor(model => model.password, new { @class = "w-100 form-control" })
-                @Html.ValidationMessageFor(model => model.password)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, "Email", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
         </div>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Lembrar-me
-            </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.password, "Senha", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+        </div>
+
+
+        <button class="book_now_btn button_hover" type="submit">Entrar</button>
+
+        <div class="row text-center justify-content-center mt-1">
+            <a href="@Url.Action("Create", "ClienteViewModels")" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none">Nao possui conta?</span>
+            </a>
+        </div>
     }
+
 </div>
 

@@ -1,13 +1,344 @@
-﻿
+﻿@model LaguettoHotel.Models.Reserva
+
 @{
-    
+    ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    LaguettoHotel.Models.loginUser user = (LaguettoHotel.Models.loginUser)Session["usuarioLogado"];
 }
 
-<h2>Index</h2>
 
-@if (Session.Keys.Count > 0 && Session["usuarioLogado"] != null)
-{
-    <p>Ola, @Session["usuarioLogado"]</p>
-}
+<style>
+    #dataEntrada, #dataSaida, #CPF, #Quarto {
+        background-color: white;
+    }
 
+        #dataEntrada, #dataSaida, #CPF, #Quarto::placeholder {
+            color: black;
+        }
+
+    .wide {
+        background-color: black;
+        color: #fff;
+    }
+</style>
+<!--================Banner Area =================-->
+<section class="banner_area">
+    <div class="booking_table d_flex align-items-center">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container">
+            <div class="banner_content text-center">
+                <h6>Longe da vida monótona</h6>
+                <h2>Relaxe sua mente</h2>
+                <p>
+                    Se você estiver vendo cassetes virgens na web, pode ficar muito confuso com a <br> diferença de preço. Você pode ver alguns por apenas $17 cada.
+                </p>
+                <a href="@Url.Action("Create", "Reservas")" class="btn theme_btn button_hover">Fazer uma reserva</a>
+            </div>
+        </div>
+    </div>
+    @if (user != null)
+    {
+        using (Html.BeginForm("Create", "Reservas"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="hotel_booking_area position">
+                <div class="container">
+                    <div class="hotel_booking_table">
+                        <div class="col-md-3">
+                            <h2>Reserva <br />rapida</h2>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="boking_table">
+                                <div class="row pl-5">
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker11'>
+
+                                                    @Html.EditorFor(model => model.dataEntrada, new { htmlAttributes = new { @class = "form-control", placeholder = "Entrada", style = "color:white" } })
+
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker11'>
+                                                    @Html.EditorFor(model => model.dataSaida, new { htmlAttributes = new { @class = "form-control", placeholder = "Saida", style = "color:white" } })
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    @{
+
+
+                                                        LaguettoHotel.Models.Cliente cliente = (LaguettoHotel.Models.Cliente)Session["dadosForeign"];
+
+                                                    }
+
+                                                    @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @Value = cliente.CPF, @class = "form-control", placeholder = "CPF", style = "color:white" } });
+                                                </div>
+                                            </div>
+                                            <div class="input-group form-group">
+                                                @Html.DropDownList("Quarto", new List<SelectListItem> {
+                                                    new SelectListItem { Text = "Quarto 01", Value = "1"},
+                                                    new SelectListItem { Text = "Quarto 02", Value = "2"},
+                                                    new SelectListItem { Text = "Quarto 03", Value = "3"},
+                                                    new SelectListItem { Text = "Quarto 04", Value = "4"},
+                                                    new SelectListItem { Text = "Quarto 05", Value = "5"}
+                                                }, "Quarto", new { @class = "wide bg-light", style = "background:white" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <button class="book_now_btn button_hover" type="submit">Reservar!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</section>
+<!--================Banner Area =================-->
+<!--================ Accomodation Area  =================-->
+<section class="accomodation_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_color">Acomodações</h2>
+            <p>Todos nós vivemos em uma época que pertence aos jovens no coração. Vida que está se tornando extremamente rápida,</p>
+        </div>
+        <div class="row mb_30">
+            <div class="col-lg-3 col-sm-6">
+                <div class="accomodation_item text-center">
+                    <div class="hotel_img">
+                        <img src="~/Content/Public/image/room1.jpg" alt="">
+                        <a href="javascript:;" class="btn theme_btn button_hover">Reservar</a>
+                    </div>
+                    <a href="javascript:;"><h4 class="sec_h4">Quarto Duplo Deluxe</h4></a>
+                    <h5>R$250<small>/noite</small></h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="accomodation_item text-center">
+                    <div class="hotel_img">
+                        <img src="~/Content/Public/image/room2.jpg" alt="">
+                        <a href="javascript:;" class="btn theme_btn button_hover">Reservar</a>
+                    </div>
+                    <a href="javascript:;"><h4 class="sec_h4">Quarto Individual Deluxe</h4></a>
+                    <h5>R$200<small>/noite</small></h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="accomodation_item text-center">
+                    <div class="hotel_img">
+                        <img src="~/Content/Public/image/room3.jpg" alt="">
+                        <a href="javascript:;" class="btn theme_btn button_hover">Reservar</a>
+                    </div>
+                    <a href="javascript:;"><h4 class="sec_h4">Suíte de lua de mel</h4></a>
+                    <h5>R$750<small>/noite</small></h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="accomodation_item text-center">
+                    <div class="hotel_img">
+                        <img src="~/Content/Public/image/room4.jpg" alt="">
+                        <a href="javascript:;" class="btn theme_btn button_hover">Reservar</a>
+                    </div>
+                    <a href="javascript:;"><h4 class="sec_h4">Dupla Economia</h4></a>
+                    <h5>R$200<small>/noite</small></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ Accomodation Area  =================-->
+<!--================ Facilities Area  =================-->
+<section class="facilities_area section_gap">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="">
+    </div>
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_w">Instalações Reais</h2>
+            <p>Quem está extremamente apaixonado pelo sistema ecológico.</p>
+        </div>
+        <div class="row mb_30">
+            <div class="col-lg-4 col-md-6">
+                <div class="facilities_item">
+                    <h4 class="sec_h4"><i class="lnr lnr-dinner"></i>Restaurante</h4>
+                    <p>O uso da Internet está se tornando mais comum devido ao rápido avanço da tecnologia e do poder.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="facilities_item">
+                    <h4 class="sec_h4"><i class="lnr lnr-bicycle"></i>Clube de Esportes</h4>
+                    <p>O uso da Internet está se tornando mais comum devido ao rápido avanço da tecnologia e do poder.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="facilities_item">
+                    <h4 class="sec_h4"><i class="lnr lnr-shirt"></i>Piscina</h4>
+                    <p>O uso da Internet está se tornando mais comum devido ao rápido avanço da tecnologia e do poder.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="facilities_item">
+                    <h4 class="sec_h4"><i class="lnr lnr-car"></i>Alugar um carro</h4>
+                    <p>O uso da Internet está se tornando mais comum devido ao rápido avanço da tecnologia e do poder.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="facilities_item">
+                    <h4 class="sec_h4"><i class="lnr lnr-construction"></i>Academia</h4>
+                    <p>O uso da Internet está se tornando mais comum devido ao rápido avanço da tecnologia e do poder.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="facilities_item">
+                    <h4 class="sec_h4"><i class="lnr lnr-coffee-cup"></i>Bar</h4>
+                    <p>O uso da Internet está se tornando mais comum devido ao rápido avanço da tecnologia e do poder.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ Facilities Area  =================-->
+<!--================ Testimonial Area  =================-->
+<section class="testimonial_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_color">Depoimento de nossos clientes</h2>
+            <p>A Revolução Francesa constituiu para a consciência da classe aristocrática dominante uma queda de</p>
+        </div>
+        <div class="testimonial_slider owl-carousel">
+            <div class="media testimonial_item">
+                <img class="rounded-circle" src="~/Content/Public/image/testtimonial-1.jpg" alt="">
+                <div class="media-body">
+                    <p>Como indigentes viajantes conscientes, devemos sempre nos preocupar com nossa querida Mãe Terra. Se você pensar sobre isso, você viaja em seu rosto, e ela é a</p>
+                    <a href="javascript:;"><h4 class="sec_h4">Fanny Spencer</h4></a>
+                    <div class="star">
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star-half-o"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="media testimonial_item">
+                <img class="rounded-circle" src="~/Content/Public/image/testtimonial-1.jpg" alt="">
+                <div class="media-body">
+                    <p>Como indigentes viajantes conscientes, devemos sempre nos preocupar com nossa querida Mãe Terra. Se você pensar sobre isso, você viaja em seu rosto, e ela é a</p>
+                    <a href="javascript:;"><h4 class="sec_h4">Fanny Spencer</h4></a>
+                    <div class="star">
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star-half-o"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="media testimonial_item">
+                <img class="rounded-circle" src="~/Content/Public/image/testtimonial-1.jpg" alt="">
+                <div class="media-body">
+                    <p>Como indigentes viajantes conscientes, devemos sempre nos preocupar com nossa querida Mãe Terra. Se você pensar sobre isso, você viaja em seu rosto, e ela é a</p>
+                    <a href="javascript:;"><h4 class="sec_h4">Fanny Spencer</h4></a>
+                    <div class="star">
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star-half-o"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="media testimonial_item">
+                <img class="rounded-circle" src="~/Content/Public/image/testtimonial-1.jpg" alt="">
+                <div class="media-body">
+                    <p>Como indigentes viajantes conscientes, devemos sempre nos preocupar com nossa querida Mãe Terra. Se você pensar sobre isso, você viaja em seu rosto, e ela é a</p>
+                    <a href="javascript:;"><h4 class="sec_h4">Fanny Spencer</h4></a>
+                    <div class="star">
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star"></i></a>
+                        <a href="javascript:;"><i class="fa fa-star-half-o"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ Testimonial Area  =================-->
+<!--================ Latest Blog Area  =================-->
+<section class="latest_blog_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_color">últimas postagens do blog</h2>
+            <p>A Revolução Francesa constituiu para a consciência da classe aristocrática dominante uma queda de</p>
+        </div>
+        <div class="row mb_30">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-recent-blog-post">
+                    <div class="thumb">
+                        <img class="img-fluid" src="~/Content/Public/image/blog/blog-1.jpg" alt="post">
+                    </div>
+                    <div class="details">
+                        <div class="tags">
+                            <a href="javascript:;" class="button_hover tag_btn">Viagem</a>
+                            <a href="javascript:;" class="button_hover tag_btn">Estilo de vida</a>
+                        </div>
+                        <a href="javascript:;"><h4 class="sec_h4">Publicidade de baixo custo</h4></a>
+                        <p>Acres of Diamonds ... você leu a famosa história, ou pelo menos a tinha relacionado a você. Um fazendeiro.</p>
+                        <h6 class="date title_color">31 de janeiro de 2018</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-recent-blog-post">
+                    <div class="thumb">
+                        <img class="img-fluid" src="~/Content/Public/image/blog/blog-2.jpg" alt="post">
+                    </div>
+                    <div class="details">
+                        <div class="tags">
+                            <a href="javascript:;" class="button_hover tag_btn">Viagem</a>
+                            <a href="javascript:;" class="button_hover tag_btn">Estilo de vida</a>
+                        </div>
+                        <a href="javascript:;"><h4 class="sec_h4">Creative Outdoor Ads</h4></a>
+                        <p>A dúvida e o medo interferem em nossa capacidade de alcançar ou definir metas. Dúvida e medo são</p>
+                        <h6 class="date title_color">31 de janeiro de 2018</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-recent-blog-post">
+                    <div class="thumb">
+                        <img class="img-fluid" src="~/Content/Public/image/blog/blog-3.jpg" alt="post">
+                    </div>
+                    <div class="details">
+                        <div class="tags">
+                            <a href="javascript:;" class="button_hover tag_btn">Viagem</a>
+                            <a href="javascript:;" class="button_hover tag_btn">Estilo de vida</a>
+                        </div>
+                        <a href="javascript:;"><h4 class="sec_h4">É classificado como usar gratuitamente</h4></a>
+                        <p>Por que você quer se motivar? Na verdade, apenas responder a essa pergunta totalmente pode</p>
+                        <h6 class="date title_color">31 de janeiro de 2018</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ Recent Area  =================-->

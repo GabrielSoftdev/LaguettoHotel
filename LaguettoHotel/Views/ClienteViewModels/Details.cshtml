@@ -1,91 +1,83 @@
-﻿@model LaguettoHotel.Models.ClienteViewModel
-
+﻿@model LaguettoHotel.Models.CustomerDetailsViewModel
+@using LaguettoHotel.Models
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>ClienteViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+<div class="container-fluid" style="padding-left: 30vw; padding-right:30vw; margin-top:80px;">
+    <h2>Seu Perfil</h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CPF)
-        </dt>
+    <div class="">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Nome:
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CPF)
-        </dd>
+            <dd>
+                @Model._cliente.Nome
+            </dd>
+            <dt>
+                CPF:
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Senha)
-        </dt>
+            <dd>
+                @Model._cliente.CPF
+            </dd>
+            <dt>
+                Telefone:
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Senha)
-        </dd>
+            <dd>
+                @Model._cliente.Telefone
+            </dd>
+        </dl>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CEP)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CEP)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Endereco)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Endereco)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Bairro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bairro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cidade)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cidade)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Uf)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Uf)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-
-    </dl>
+        <h4 class="mt-5">Suas Reservas</h4>
+        <table style="margin-bottom:50px;" class="table table-borderless">
+            <thead>
+                <tr>
+                    <td>Entrada</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>Saida</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>Quarto</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>Valor Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model._reserva != null)
+                {
+                    foreach (Reserva item in Model._reserva)
+                    {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.dataEntrada)</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>@Html.DisplayFor(modelItem => item.dataSaida)</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>@Html.DisplayFor(modelItem => item.idQuarto)</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>@Html.DisplayFor(modelItem => item.valorTotal)</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Reservas", new { id = item.idQuarto})" class="nav-link text-body px-0">
+                            Editar
+                        </a>
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <a href="@Url.Action("CancelarReserva", "Reservas", new { id = item.idQuarto})" class="nav-link text-body px-0">
+                            Cancelar
+                        </a>
+                    </td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDpessoa }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -36,15 +36,15 @@
     <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="tipoUsuario" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="tipoUsuario" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="admin" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="foreignId" Type="Int32" Nullable="false" />
+    <Property Name="foreignId" Type="Int32" />
   </EntityType>
   <EntityType Name="Reserva">
     <Key>
       <PropertyRef Name="idQuarto" />
     </Key>
-    <Property Name="idQuarto" Type="Int32" Nullable="false" />
+    <Property Name="idQuarto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Quarto" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />

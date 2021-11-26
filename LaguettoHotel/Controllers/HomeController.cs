@@ -12,31 +12,26 @@ namespace LaguettoHotel.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            if (Session["usuarioLogado"] != null)
-            { return View(); }
-            else
+            LaguettoHotel.Models.loginUser user = (LaguettoHotel.Models.loginUser)Session["usuarioLogado"];
+           
+            if (user != null && user.admin == "s")
             {
-                return RedirectToAction("Login", "Account");
+                ////DEBUG:
+                //var json = JsonConvert.SerializeObject(Session["usuarioLogado"]);
+                //return Json(json, JsonRequestBehavior.AllowGet);
+                return RedirectToAction("AdminIndex", "Home");
             }
-
-
-            //if (Session["usuarioLogado"] != null)
-            //{
-            //    //DEBUG:
-            //    var json = JsonConvert.SerializeObject(Session["usuarioLogado"]);
-            //    return Json(json, JsonRequestBehavior.AllowGet);
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Login", "Account");
-            //}
+            ////DEBUG:
+            //var json = JsonConvert.SerializeObject(Session["usuarioLogado"]);
+            //return Json(json, JsonRequestBehavior.AllowGet);
+            return View();
         }
 
 
         // GET: Home
-        public ActionResult AdminIndex()
+        public ActionResult SobreNos()
         {
-           return View(); 
+            return View();
         }
     }
 }

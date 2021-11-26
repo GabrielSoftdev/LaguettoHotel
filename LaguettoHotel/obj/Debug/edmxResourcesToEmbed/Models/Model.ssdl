@@ -36,15 +36,15 @@
     <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="tipoUsuario" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="tipoUsuario" Type="char" MaxLength="1" />
     <Property Name="admin" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="foreignId" Type="int" Nullable="false" />
+    <Property Name="foreignId" Type="int" />
   </EntityType>
   <EntityType Name="Reserva">
     <Key>
       <PropertyRef Name="idQuarto" />
     </Key>
-    <Property Name="idQuarto" Type="int" Nullable="false" />
+    <Property Name="idQuarto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
     <Property Name="Quarto" Type="varchar" MaxLength="4" Nullable="false" />

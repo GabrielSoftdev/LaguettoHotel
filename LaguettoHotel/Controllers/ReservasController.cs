@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LaguettoHotel.Models;
+using Newtonsoft.Json;
 
 namespace LaguettoHotel.Controllers
 {
@@ -17,7 +20,13 @@ namespace LaguettoHotel.Controllers
         // GET: Reservas
         public ActionResult Index()
         {
-            return View(db.Reserva.ToList());
+            LaguettoHotel.Models.loginUser user = (LaguettoHotel.Models.loginUser)Session["usuarioLogado"];
+            if (user != null && user.admin == "s")
+            {
+                return View(db.Reserva.ToList());
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Reservas/Details/5
@@ -38,21 +47,69 @@ namespace LaguettoHotel.Controllers
         // GET: Reservas/Create
         public ActionResult Create()
         {
-            return View();
+            LaguettoHotel.Models.loginUser user = (LaguettoHotel.Models.loginUser)Session["usuarioLogado"];
+            if (user != null)
+            {
+                return View();
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         // POST: Reservas/Create
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idQuarto,Nome,CPF,Quarto,valorDiaria,valorTotal,dataEntrada,dataSaida")] Reserva reserva)
+        public ActionResult Create(Reserva reserva)
         {
+            LaguettoHotel.Models.Cliente user = (LaguettoHotel.Models.Cliente)Session["dadosForeign"];
+
+            reserva.Nome = user.Nome;
+            reserva.valorDiaria = "80,00";
+
+            TimeSpan date = Convert.ToDateTime(reserva.dataSaida) - Convert.ToDateTime(reserva.dataEntrada);
+
+            int totalDias = date.Days;
+
+            reserva.valorTotal = (totalDias * 80).ToString();
+
+            //DEBUG
+            //var json = JsonConvert.SerializeObject(reserva);
+            //return Json(json);
+
             if (ModelState.IsValid)
             {
                 db.Reserva.Add(reserva);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    LaguettoHotel.Models.Cliente cliente = (LaguettoHotel.Models.Cliente)Session["dadosForeign"];
+                    if (db.SaveChanges() != 0)
+                    {
+                        return RedirectToAction("Details", "ClienteViewModels", new { id = cliente.idCliente });
+                    }
+
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (DbEntityValidationResult item in ex.EntityValidationErrors)
+                    {
+                        // Get entry
+
+                        DbEntityEntry entry = item.Entry;
+                        string entityTypeName = entry.Entity.GetType().Name;
+
+                        // Display or log error messages
+
+                        foreach (DbValidationError subItem in item.ValidationErrors)
+                        {
+                            //occurred in {1} at {2}
+                            string message = string.Format("{0}",
+                                     subItem.ErrorMessage, entityTypeName, subItem.PropertyName);
+
+                            ModelState.AddModelError(string.Empty, message);
+                            return View(reserva);
+                            //Console.WriteLine(message);
+                        }
+                    }
+                }
             }
 
             return View(reserva);
@@ -78,30 +135,67 @@ namespace LaguettoHotel.Controllers
         // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idQuarto,Nome,CPF,Quarto,valorDiaria,valorTotal,dataEntrada,dataSaida")] Reserva reserva)
+        public ActionResult Edit(Reserva reserva)
         {
+            LaguettoHotel.Models.Cliente cliente = (LaguettoHotel.Models.Cliente)Session["dadosForeign"];
+            reserva.Nome = cliente.Nome;
+            reserva.valorDiaria = "80,00";
+
+            TimeSpan date = Convert.ToDateTime(reserva.dataSaida) - Convert.ToDateTime(reserva.dataEntrada);
+
+            int totalDias = date.Days;
+
+            reserva.valorTotal = (totalDias * 80).ToString();
+
+
             if (ModelState.IsValid)
             {
                 db.Entry(reserva).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    if (db.SaveChanges() != 0)
+                    {
+                        return RedirectToAction("Details", "ClienteViewModels", new { id = cliente.idCliente });
+                    }
+
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (DbEntityValidationResult item in ex.EntityValidationErrors)
+                    {
+                        // Get entry
+
+                        DbEntityEntry entry = item.Entry;
+                        string entityTypeName = entry.Entity.GetType().Name;
+
+                        // Display or log error messages
+
+                        foreach (DbValidationError subItem in item.ValidationErrors)
+                        {
+                            //occurred in {1} at {2}
+                            string message = string.Format("{0}",
+                                     subItem.ErrorMessage, entityTypeName, subItem.PropertyName);
+
+                            ModelState.AddModelError(string.Empty, message);
+                            return View(reserva);
+                            //Console.WriteLine(message);
+                        }
+                    }
+                }
             }
             return View(reserva);
         }
 
         // GET: Reservas/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult CancelarReserva(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            LaguettoHotel.Models.Cliente cliente = (LaguettoHotel.Models.Cliente)Session["dadosForeign"];
+
             Reserva reserva = db.Reserva.Find(id);
-            if (reserva == null)
-            {
-                return HttpNotFound();
-            }
-            return View(reserva);
+            db.Reserva.Remove(reserva);
+            db.SaveChanges();
+
+            return RedirectToAction("Details", "ClienteViewModels", new { id = cliente.idCliente });
         }
 
         // POST: Reservas/Delete/5

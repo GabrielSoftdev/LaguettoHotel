@@ -1,138 +1,250 @@
-﻿@if (Session["usuarioLogado"] != null && Session["dadosForeign"] != null)
-{
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
 
-    LaguettoHotel.Models.loginUser user = (LaguettoHotel.Models.loginUser)Session["usuarioLogado"];
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/Public/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/Public/vendors/linericon/style.css">
+    <link rel="stylesheet" href="~/Content/Public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/Public/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/Public/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="~/Content/Public/vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="~/Content/Public/vendors/owl-carousel/owl.carousel.min.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="~/Content/Public/css/style.css">
+    <link rel="stylesheet" href="~/Content/Public/css/responsive.css">
+</head>
+<body>
+    <style>
+        footer {
+            background-color: #638C80 !important;
+            color: white !important;
+        }
 
-    if (user.admin == "s")
-    {
-        @Html.Partial("_AdminLayout")
-    }
-    else
-    {
-        @Html.Partial("_CommonLayout")
-    }
+        .hotel-booking-table {
+            background-color: #638C80 !important;
+        }
 
-}
-else
-{
-    @Html.Partial("_TopLayout")
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
-        <div class="container-fluid py-1 px-3">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
+        .col-md-4 input.form-control::placeholder {
+            color: black !important;
+        }
+        .col-md-4 input.form-control{
+            color: black !important;
+        }
+
+        footer a {
+            /*background-color: #638C80 !important;*/
+            color: white !important;
+        }
+    </style>
+    <!--================Header Area =================-->
+    <header class="header_area">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <a class="navbar-brand logo_h nav-link text-body font-weight-bold px-0" href="index.html">@*<img src="~/Content/Public/image/Logo.png" alt="">*@<h2 style="color: #638C80">Laguetto Hotel</h2></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active">
+                            <a href="@Url.Action("Index", "Home")" class="nav-link text-body px-0">
+                                <span class="d-sm-inline d-none">Inicio</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("SobreNos", "Home")" class="nav-link text-body px-0">
+                                <span class="d-sm-inline d-none">Sobre nos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Create", "Reservas")" class="nav-link text-body px-0">
+                                <span class="d-sm-inline d-none">Reserva</span>
+                            </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="javascript:;">Galeria</a></li>
+                        <li class="nav-item submenu dropdown">
+                            <a href="javascript:;" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="javascript:;">Blog</a></li>
+                                <li class="nav-item"><a class="nav-link" href="javascript:;">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contato</a></li>
+                        <li class="nav-item d-flex align-items-center">
+                            @{
+                                LaguettoHotel.Models.loginUser user = (LaguettoHotel.Models.loginUser)Session["usuarioLogado"];
+                                LaguettoHotel.Models.Cliente cliente = (LaguettoHotel.Models.Cliente)Session["dadosForeign"];
+
+                                if (user != null)
+                                {
+                                    <a href="@Url.Action("Details", "ClienteViewModels", new { id = cliente.idCliente})" class="nav-link text-body font-weight-bold px-0">
+                                        <i class="fa fa-user me-sm-1"></i>
+                                        &nbsp;
+                                        <span class="d-sm-inline d-none">@user.Username</span>
+                                    </a>
+
+                                    <span>&nbsp;|&nbsp;</span>
+
+                                    <a href="@Url.Action("Logout", "Account")" class="nav-link text-body px-0">
+                                        <span class="d-sm-inline d-none">Sair</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Login", "Account")" class="nav-link text-body font-weight-bold px-0">
+                                        <i class="fa fa-user me-sm-1"></i>
+                                        <span class="d-sm-inline d-none">Entrar</span>
+                                    </a>
+                                }
+
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--================Header Area =================-->
+    @RenderBody()
+    <!--================ start footer Area  =================-->
+    <footer class="footer-area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">Sobre a Agencia</h6>
+                        <p>O mundo se tornou tão rápido que as pessoas não querem ficar lendo uma página de informações, elas preferem olhar para uma apresentação e entender a mensagem. Chegou a um ponto</p>
                     </div>
                 </div>
-                <ul class="navbar-nav  justify-content-end">
-                    <li class="nav-item d-flex align-items-center">
-                        <a href="@Url.Action("Login", "Account")" class="nav-link text-body font-weight-bold px-0">
-                            <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Entrar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                            <div class="sidenav-toggler-inner">
-                                <i class="sidenav-toggler-line"></i>
-                                <i class="sidenav-toggler-line"></i>
-                                <i class="sidenav-toggler-line"></i>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">Navegaçao</h6>
+                        <div class="row">
+                            <div class="col-4">
+                                <ul class="list_style">
+                                    <li><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+                                    <li><a href="javascript:;">Recursos</a></li>
+                                    <li><a href="javascript:;">Serviços</a></li>
+                                    <li><a href="javascript:;">Portfolio</a></li>
+                                </ul>
                             </div>
-                        </a>
-                    </li>
-                    <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-body p-0">
-                            <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-bell cursor-pointer"></i>
-                        </a>
-                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                            <li class="mb-2">
-                                <a class="dropdown-item border-radius-md" href="javascript:;">
-                                    <div class="d-flex py-1">
-                                        <div class="my-auto">
-                                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="text-sm font-weight-normal mb-1">
-                                                <span class="font-weight-bold">New message</span> from Laur
-                                            </h6>
-                                            <p class="text-xs text-secondary mb-0">
-                                                <i class="fa fa-clock me-1"></i>
-                                                13 minutes ago
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="mb-2">
-                                <a class="dropdown-item border-radius-md" href="javascript:;">
-                                    <div class="d-flex py-1">
-                                        <div class="my-auto">
-                                            <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="text-sm font-weight-normal mb-1">
-                                                <span class="font-weight-bold">New album</span> by Travis Scott
-                                            </h6>
-                                            <p class="text-xs text-secondary mb-0">
-                                                <i class="fa fa-clock me-1"></i>
-                                                1 day
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item border-radius-md" href="javascript:;">
-                                    <div class="d-flex py-1">
-                                        <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                                            <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <title>credit-card</title>
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                                        <g transform="translate(1716.000000, 291.000000)">
-                                                            <g transform="translate(453.000000, 454.000000)">
-                                                                <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                                                <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="text-sm font-weight-normal mb-1">
-                                                Payment successfully completed
-                                            </h6>
-                                            <p class="text-xs text-secondary mb-0">
-                                                <i class="fa fa-clock me-1"></i>
-                                                2 days
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                            <div class="col-4">
+                                <ul class="list_style">
+                                    <li><a href="javascript:;">Equipe</a></li>
+                                    <li><a href="javascript:;">Preços</a></li>
+                                    <li><a href="javascript:;">Blog</a></li>
+                                    <li><a href="javascript:;">Contato</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">Newsletter</h6>
+                        <p>Para profissionais de negócios presos entre o alto preço do OEM e impressão e produção gráfica medíocres,</p>
+                        <div id="mc_embed_signup">
+                            <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative">
+                                <div class="input-group d-flex flex-row">
+                                    <input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
+                                    <button class="btn sub-btn"><span class="lnr lnr-location"></span></button>
+                                </div>
+                                <div class="mt-10 info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget instafeed">
+                        <h6 class="footer_title">InstaFeed</h6>
+                        <ul class="list_style instafeed d-flex flex-wrap">
+                            <li><img src="image/instagram/Image-01.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-02.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-03.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-04.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-05.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-06.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-07.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-08.jpg" alt=""></li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border_line"></div>
+            <div class="row footer-bottom d-flex justify-content-between align-items-center">
+                <p class="col-lg-8 col-sm-12 footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> Todos os direitos reservados | Este modelo é feito com <i class="fa fa-heart-o" aria-hidden="true"></i> por <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-sm-12 footer-social">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-behance"></i></a>
+                </div>
             </div>
         </div>
-    </nav>
-}
-<div class="container body-content">
-    @RenderBody()
+    </footer>
+    @if (Html.ValidationSummary(true, "", new { @class = "text-danger" }) != null)
+    {
+        foreach (var item in ViewContext.ViewData.ModelState)
+        {
+            if (item.Value.Errors.Any())
+            {
+                <div class="toast mt-8" style="position: absolute; top: 0; right: 0;">
+                    <div class="toast-header">
+                        <img src="..." class="rounded mr-2" alt="...">
+                        <strong class="mr-auto">Bootstrap</strong>
+                        <small>11 mins ago</small>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" style="top: 0; right: 0;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                        @*<td><b>@item.Key</b></td>*@
+                        @*<td>@((item.Value == null || item.Value.Value == null) ? "<null>" : item.Value.Value.RawValue)</td>*@
+                        <span>@(string.Join("; ", item.Value.Errors.Select(x => x.ErrorMessage)))</span>
+                    </div>
+                </div>
+            }
+        }
+    }
 
-
-
-    @Html.Partial("_BottomLayout")
-
-
+    @if (HttpContext.Current.Request.Url.AbsolutePath == "/ClienteViewModels/Create")
+    {
+        <script src="~/Content/Cliente/ClienteViewModel_Create.js"></script>
+    }
+    <!--================ End footer Area  =================-->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7-beta.23/jquery.inputmask.min.js" integrity="sha512-mh8BrmrpMLvcfym8unG8TXU+LGUP0A2C6tN4b/RXWK3xffaA9k4blevFyY9WFyn3Y4pqpPNIVWtCZUTGRLqrrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="~/Content/Public/js/popper.js"></script>
+    <script src="~/Content/Public/js/bootstrap.min.js"></script>
+    <script src="~/Content/Public/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/Content/Public/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/Public/js/mail-script.js"></script>
+    <script src="~/Content/Public/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Content/Public/vendors/nice-select/js/jquery.nice-select.js"></script>
+    <script src="~/Content/Public/js/mail-script.js"></script>
+    <script src="~/Content/Public/js/stellar.js"></script>
+    <script src="~/Content/Public/vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="~/Content/Public/js/custom.js"></script>
+</body>
+</html>
 
 
 
