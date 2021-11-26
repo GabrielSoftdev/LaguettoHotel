@@ -1,13 +1,23 @@
 # LaguettoHotel
 
-### Passo a passo para utilizar: 
+### Requisitos para inicar o projeto:
+- Visual Studio 2019
+- SQL Server
 
-#### Index:
-- ##### chegando na *Index* da Home fazer login pois as paginas de Reserva e Perfil de usuario estarao bloqueados.
 
-![image](https://user-images.githubusercontent.com/58490187/143657826-dd77e587-ec56-4abb-bd6b-2675f0e7a325.png)
 
-#### Index Logado:
-- ##### Quando logado voce estara habilitado a ver o perfil do usuario, suas reservas ativas e/ou fazer reservas.
+### Passo a passo para executar o projeto:
 
-![image](https://user-images.githubusercontent.com/58490187/143657937-5294d577-2679-4ef9-885d-0b5cc1e8a20a.png)
+#### Banco de dados:
+- Abra o SQL Server
+- Arraste o arquivo *LaguettoHotel.sql* para dentro do SQL Server de Ctrl+A e execute-o.
+
+
+#### Projeto Web:
+
+- Abra o Visual Studio 2019.
+- Na barra de ferramentas vai em _*"Arquivo > Abrir > Projeto/Solução"*_.
+![image](https://user-images.githubusercontent.com/58490187/143658632-56051a92-2fff-4ade-ac27-fda2b5efff19.png)
+
+- Ao Abrir o Projeto, clique em executar e se for o caso, escolha o navegador de preferencia.
+![image](https://user-images.githubusercontent.com/58490187/143658724-34b6c162-345c-48d3-b21b-9b4698ec2841.png)
