@@ -21,6 +21,12 @@
 
 ![image](https://user-images.githubusercontent.com/58490187/143659358-fa32ac74-3046-4824-860e-6d5f2cb389e8.png)
 
+
+- Va ate o local do projeto e selecione a *Solução* do projeto
+![image](https://user-images.githubusercontent.com/58490187/143659424-f1d7022a-6d2f-44d9-9001-f9d7192eafd1.png)
+
+
+
 - Ao Abrir o Projeto, clique em executar e se for o caso, escolha o navegador de preferencia.
 
 ![image](https://user-images.githubusercontent.com/58490187/143658724-34b6c162-345c-48d3-b21b-9b4698ec2841.png)
