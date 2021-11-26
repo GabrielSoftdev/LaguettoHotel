@@ -17,7 +17,7 @@ namespace LaguettoHotel.Controllers
 {
     public class ClienteViewModelsController : Controller
     {
-        private LaguettoHotelEntities db = new LaguettoHotelEntities();
+        private LaguettoHotelWebEntities db = new LaguettoHotelWebEntities();
         // GET: ClienteViewModels
         public ActionResult Index()
         {

@@ -4,26 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LaguettoHotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LaguettoHotelWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="idCliente" />
           </Key>
           <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
-          <Property Name="Telefone" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="CEP" Type="varchar" MaxLength="8" Nullable="false" />
-          <Property Name="Logradouro" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Bairro" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Cidade" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="UF" Type="varchar" MaxLength="2" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Funcionario">
-          <Key>
-            <PropertyRef Name="idFuncionario" />
-          </Key>
-          <Property Name="idFuncionario" Type="int" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="Telefone" Type="varchar" MaxLength="15" Nullable="false" />
@@ -58,58 +44,21 @@
           <Property Name="dataEntrada" Type="date" Nullable="false" />
           <Property Name="dataSaida" Type="date" Nullable="false" />
         </EntityType>
-        <EntityType Name="Servico">
-          <Key>
-            <PropertyRef Name="idServico" />
-          </Key>
-          <Property Name="idServico" Type="int" Nullable="false" />
-          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
-          <Property Name="Servicos" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="valorServicos" Type="varchar" MaxLength="10" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Vendas">
-          <Key>
-            <PropertyRef Name="idVendas" />
-          </Key>
-          <Property Name="idVendas" Type="int" Nullable="false" />
-          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
-          <Property Name="valorDiaria" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="valorServicos" Type="varchar" MaxLength="10" Nullable="false" />
-        </EntityType>
-        <EntityContainer Name="LaguettoHotelModelStoreContainer">
+        <EntityContainer Name="LaguettoHotelWebModelStoreContainer">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Funcionario" EntityType="Self.Funcionario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="loginUser" EntityType="Self.loginUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Servico" EntityType="Self.Servico" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Vendas" EntityType="Self.Vendas" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="LaguettoHotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="LaguettoHotelWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="idCliente" />
           </Key>
           <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CEP" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Logradouro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UF" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Funcionario">
-          <Key>
-            <PropertyRef Name="idFuncionario" />
-          </Key>
-          <Property Name="idFuncionario" Type="Int32" Nullable="false" />
           <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Telefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
@@ -144,42 +93,19 @@
           <Property Name="dataEntrada" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="dataSaida" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
-        <EntityType Name="Servico">
-          <Key>
-            <PropertyRef Name="idServico" />
-          </Key>
-          <Property Name="idServico" Type="Int32" Nullable="false" />
-          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Servicos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="valorServicos" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Vendas">
-          <Key>
-            <PropertyRef Name="idVendas" />
-          </Key>
-          <Property Name="idVendas" Type="Int32" Nullable="false" />
-          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="valorDiaria" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="valorServicos" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityContainer Name="LaguettoHotelEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="LaguettoHotelWebEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
-          <EntitySet Name="Funcionario" EntityType="Self.Funcionario" />
           <EntitySet Name="loginUser" EntityType="Self.loginUser" />
           <EntitySet Name="Reserva" EntityType="Self.Reserva" />
-          <EntitySet Name="Servico" EntityType="Self.Servico" />
-          <EntitySet Name="Vendas" EntityType="Self.Vendas" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LaguettoHotelModelStoreContainer" CdmEntityContainer="LaguettoHotelEntities">
+        <EntityContainerMapping StorageEntityContainer="LaguettoHotelWebModelStoreContainer" CdmEntityContainer="LaguettoHotelWebEntities">
           <EntitySetMapping Name="Cliente">
-            <EntityTypeMapping TypeName="LaguettoHotelModel.Cliente">
+            <EntityTypeMapping TypeName="LaguettoHotelWebModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
                 <ScalarProperty Name="idCliente" ColumnName="idCliente" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
@@ -193,23 +119,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Funcionario">
-            <EntityTypeMapping TypeName="LaguettoHotelModel.Funcionario">
-              <MappingFragment StoreEntitySet="Funcionario">
-                <ScalarProperty Name="idFuncionario" ColumnName="idFuncionario" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="CPF" ColumnName="CPF" />
-                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
-                <ScalarProperty Name="CEP" ColumnName="CEP" />
-                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
-                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
-                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
-                <ScalarProperty Name="UF" ColumnName="UF" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="loginUser">
-            <EntityTypeMapping TypeName="LaguettoHotelModel.loginUser">
+            <EntityTypeMapping TypeName="LaguettoHotelWebModel.loginUser">
               <MappingFragment StoreEntitySet="loginUser">
                 <ScalarProperty Name="idUser" ColumnName="idUser" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -222,7 +133,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Reserva">
-            <EntityTypeMapping TypeName="LaguettoHotelModel.Reserva">
+            <EntityTypeMapping TypeName="LaguettoHotelWebModel.Reserva">
               <MappingFragment StoreEntitySet="Reserva">
                 <ScalarProperty Name="idQuarto" ColumnName="idQuarto" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
@@ -232,28 +143,6 @@
                 <ScalarProperty Name="valorTotal" ColumnName="valorTotal" />
                 <ScalarProperty Name="dataEntrada" ColumnName="dataEntrada" />
                 <ScalarProperty Name="dataSaida" ColumnName="dataSaida" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Servico">
-            <EntityTypeMapping TypeName="LaguettoHotelModel.Servico">
-              <MappingFragment StoreEntitySet="Servico">
-                <ScalarProperty Name="idServico" ColumnName="idServico" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="CPF" ColumnName="CPF" />
-                <ScalarProperty Name="Servicos" ColumnName="Servicos" />
-                <ScalarProperty Name="valorServicos" ColumnName="valorServicos" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vendas">
-            <EntityTypeMapping TypeName="LaguettoHotelModel.Vendas">
-              <MappingFragment StoreEntitySet="Vendas">
-                <ScalarProperty Name="idVendas" ColumnName="idVendas" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="CPF" ColumnName="CPF" />
-                <ScalarProperty Name="valorDiaria" ColumnName="valorDiaria" />
-                <ScalarProperty Name="valorServicos" ColumnName="valorServicos" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

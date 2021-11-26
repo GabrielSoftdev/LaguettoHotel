@@ -11,7 +11,7 @@ namespace LaguettoHotel.Controllers
     public class AccountController : Controller
     {
 
-        private LaguettoHotelEntities db = new LaguettoHotelEntities();
+        private LaguettoHotelWebEntities db = new LaguettoHotelWebEntities();
         public ActionResult Login()
         {
             return View();
@@ -44,10 +44,6 @@ namespace LaguettoHotel.Controllers
                             Session["dadosForeign"] = cliente;
                             return RedirectToAction("Index", "Home");
                         }
-                        // VEM PRA CA CASO SEJA UM FUNCIONARIO LOGADO
-                        var funcionario = db.Funcionario.Where(c => c.idFuncionario == usuario.foreignId).FirstOrDefault();
-                        Session["dadosForeign"] = funcionario;
-                        return RedirectToAction("Index", "Home");
                     }
                     if (usuario.admin == "s")
                     {

@@ -1,5 +1,7 @@
 ﻿$(document).ready(() => {
+    
     $('.toast').toast('show');
+
     $('#CPF').inputmask("999.999.999-99");
     $('#CEP').inputmask("99999-999");
     $('#Telefone').inputmask("(99) 99999-9999");

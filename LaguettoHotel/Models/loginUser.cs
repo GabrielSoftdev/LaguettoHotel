@@ -11,13 +11,11 @@ namespace LaguettoHotel.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class loginUser
     {
         public int idUser { get; set; }
         public string Username { get; set; }
-        [DataType(DataType.Password)]
         public string password { get; set; }
         public string email { get; set; }
         public string tipoUsuario { get; set; }

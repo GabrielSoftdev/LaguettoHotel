@@ -4,13 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d923e5b702fa4fefab33ef0cda24a84a" Name="Diagram1">
-        <EntityTypeShape EntityType="LaguettoHotelModel.Cliente" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaguettoHotelModel.Funcionario" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaguettoHotelModel.loginUser" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaguettoHotelModel.Reserva" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaguettoHotelModel.Servico" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaguettoHotelModel.Vendas" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="81a50bca6ce146a481bd6a67c02ff268" Name="Diagram1">
+        <EntityTypeShape EntityType="LaguettoHotelWebModel.Cliente" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaguettoHotelWebModel.loginUser" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaguettoHotelWebModel.Reserva" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

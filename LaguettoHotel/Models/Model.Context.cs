@@ -13,10 +13,10 @@ namespace LaguettoHotel.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LaguettoHotelEntities : DbContext
+    public partial class LaguettoHotelWebEntities : DbContext
     {
-        public LaguettoHotelEntities()
-            : base("name=LaguettoHotelEntities")
+        public LaguettoHotelWebEntities()
+            : base("name=LaguettoHotelWebEntities")
         {
         }
     
@@ -26,10 +26,7 @@ namespace LaguettoHotel.Models
         }
     
         public virtual DbSet<Cliente> Cliente { get; set; }
-        public virtual DbSet<Funcionario> Funcionario { get; set; }
         public virtual DbSet<loginUser> loginUser { get; set; }
         public virtual DbSet<Reserva> Reserva { get; set; }
-        public virtual DbSet<Servico> Servico { get; set; }
-        public virtual DbSet<Vendas> Vendas { get; set; }
     }
 }

@@ -572,9 +572,6 @@
     </Compile>
     <Compile Include="Models\ClienteViewModel.cs" />
     <Compile Include="Models\CustomerDetailsViewModel.cs" />
-    <Compile Include="Models\Funcionario.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\loginUser.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -601,12 +598,6 @@
     <Compile Include="Models\Reserva.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Servico.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Vendas.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -621,13 +612,6 @@
     <Content Include="Content\assets\fonts\nucleo.woff" />
     <Content Include="Content\assets\fonts\nucleo.woff2" />
     <Content Include="Content\assets\js\soft-ui-dashboard.js.map" />
-    <EntityDeploy Include="Models\Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\Public\css\style.css %28Mohammad Rocky%27s conflicted copy 2018-05-08%29.map" />
     <Content Include="Content\Public\css\style.css.map" />
     <Content Include="Content\Public\fonts\fontawesome-webfont.eot" />
@@ -651,6 +635,13 @@
     <Content Include="Content\Public\vendors\linericon\fonts\Linearicons-Free.ttf" />
     <Content Include="Content\Public\vendors\linericon\fonts\Linearicons-Free.woff" />
     <Content Include="Content\Public\vendors\linericon\fonts\Linearicons-Free.woff2" />
+    <EntityDeploy Include="Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

@@ -22,10 +22,5 @@ namespace LaguettoHotel.Models
         public string valorTotal { get; set; }
         public System.DateTime dataEntrada { get; set; }
         public System.DateTime dataSaida { get; set; }
-
-        public static explicit operator Reserva(List<Reserva> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

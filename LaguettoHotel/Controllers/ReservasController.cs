@@ -15,7 +15,7 @@ namespace LaguettoHotel.Controllers
 {
     public class ReservasController : Controller
     {
-        private LaguettoHotelEntities db = new LaguettoHotelEntities();
+        private LaguettoHotelWebEntities db = new LaguettoHotelWebEntities();
 
         // GET: Reservas
         public ActionResult Index()

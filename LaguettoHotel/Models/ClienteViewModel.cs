@@ -53,24 +53,25 @@ namespace LaguettoHotel.Models
 
         /*************** Bairro ***************/
         [Display(Name = "Bairro", Prompt = "Insira seu Bairro", Description = "Descrição")]
-
+        [Required(ErrorMessage = "Insira seu Bairro!")]
         [MaxLength(length: 50, ErrorMessage = "O campo Bairro excede o máximo de cartacteres permitido")]
         public string Bairro { get; set; }
 
         /*************** Cidade ***************/
         [Display(Name = "Cidade", Prompt = "Insira seu Cidade", Description = "Descrição")]
-
+        [Required(ErrorMessage = "Insira sua Cidade!")]
         [MaxLength(length: 50, ErrorMessage = "O campo Cidade excede o máximo de cartacteres permitido")]
         public string Cidade { get; set; }
 
         /*************** Uf ***************/
         [Display(Name = "Estado", Prompt = "Selecione seu Estado", Description = "Descrição")]
+        [Required(ErrorMessage = "Selecione seu estado")]
         [MaxLength(length: 2, ErrorMessage = "O campo Estado excede o máximo de cartacteres permitido")]
         public string Uf { get; set; }
 
         /*************** Telefone ***************/
         [Display(Name = "Telefone", Prompt = "Insira seu número de Telefone", Description = "Descrição")]
-        [Required(ErrorMessage = "Por favor informe seu Celular.")]
+        [Required(ErrorMessage = "Por favor informe seu Telefone.")]
         public string Telefone { get; set; }
 
     }
