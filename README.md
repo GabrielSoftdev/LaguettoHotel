@@ -10,7 +10,7 @@
 
 #### Banco de dados:
 - Abra o SQL Server
-- Arraste o arquivo *LaguettoHotel.sql* para dentro do SQL Server de Ctrl+A e execute-o.
+- Arraste o arquivo *LaguettoHotel.sql* para dentro do SQL Server pressione Ctrl+A e execute-o.
 
 
 #### Projeto Web:
