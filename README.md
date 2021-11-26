@@ -17,8 +17,9 @@
 
 - Abra o Visual Studio 2019.
 - Na barra de ferramentas vai em _*"Arquivo > Abrir > Projeto/Solução"*_.
+- Ou pressione *Ctrl+Shift+O*.
 
-![image](https://user-images.githubusercontent.com/58490187/143658632-56051a92-2fff-4ade-ac27-fda2b5efff19.png)
+![image](https://user-images.githubusercontent.com/58490187/143659358-fa32ac74-3046-4824-860e-6d5f2cb389e8.png)
 
 - Ao Abrir o Projeto, clique em executar e se for o caso, escolha o navegador de preferencia.
 
